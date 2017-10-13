@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		63E3E8511F8D5353002CD766 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E3E8501F8D5353002CD766 /* AppDelegate.swift */; };
-		63E3E8531F8D5353002CD766 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E3E8521F8D5353002CD766 /* ViewController.swift */; };
 		63E3E8561F8D5353002CD766 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63E3E8541F8D5353002CD766 /* Main.storyboard */; };
 		63E3E8591F8D5353002CD766 /* TinkoffNews.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 63E3E8571F8D5353002CD766 /* TinkoffNews.xcdatamodeld */; };
 		63E3E85B1F8D5353002CD766 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63E3E85A1F8D5353002CD766 /* Assets.xcassets */; };
@@ -18,7 +17,6 @@
 /* Begin PBXFileReference section */
 		63E3E84D1F8D5353002CD766 /* TinkoffNews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinkoffNews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63E3E8501F8D5353002CD766 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		63E3E8521F8D5353002CD766 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		63E3E8551F8D5353002CD766 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		63E3E8581F8D5353002CD766 /* TinkoffNews.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TinkoffNews.xcdatamodel; sourceTree = "<group>"; };
 		63E3E85A1F8D5353002CD766 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -57,7 +55,6 @@
 			isa = PBXGroup;
 			children = (
 				63E3E8501F8D5353002CD766 /* AppDelegate.swift */,
-				63E3E8521F8D5353002CD766 /* ViewController.swift */,
 				63E3E8541F8D5353002CD766 /* Main.storyboard */,
 				63E3E85A1F8D5353002CD766 /* Assets.xcassets */,
 				63E3E85C1F8D5353002CD766 /* LaunchScreen.storyboard */,
@@ -140,7 +137,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				63E3E8591F8D5353002CD766 /* TinkoffNews.xcdatamodeld in Sources */,
-				63E3E8531F8D5353002CD766 /* ViewController.swift in Sources */,
 				63E3E8511F8D5353002CD766 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -281,6 +277,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SKRU67QKG5;
 				INFOPLIST_FILE = TinkoffNews/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.shedward.TinkoffNews;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -296,6 +293,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SKRU67QKG5;
 				INFOPLIST_FILE = TinkoffNews/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.shedward.TinkoffNews;
 				PRODUCT_NAME = "$(TARGET_NAME)";
