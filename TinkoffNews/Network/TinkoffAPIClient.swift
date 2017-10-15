@@ -61,14 +61,21 @@ class TinkoffAPIClient {
             }
             
             if let data = data {
-                let response = try! JSONDecoder().decode(TinkoffAPIResponse<T>.self, from: data)
                 
-                switch response.result {
-                case .ok(let payload):
-                    completition(.success(payload))
-                case .error(let errorMessage):
-                    completition(.failure(TinkoffAPIClientError(errorMessage)))
+                do {
+                    let response = try JSONDecoder().decode(TinkoffAPIResponse<T>.self, from: data)
+                    
+                    switch response.result {
+                    case .ok(let payload):
+                        completition(.success(payload))
+                    case .error(let errorMessage):
+                        completition(.failure(TinkoffAPIClientError(errorMessage)))
+                    }
+
+                } catch (let error) {
+                    completition(.failure(TinkoffAPIClientError("Parsing error: \(error.localizedDescription)")))
                 }
+                
             } else {
                 completition(.failure(TinkoffAPIClientError("No response")))
             }
