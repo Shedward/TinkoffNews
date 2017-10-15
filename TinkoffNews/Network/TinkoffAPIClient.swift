@@ -9,12 +9,6 @@
 import Foundation
 
 class TinkoffAPIClient {
-    
-    enum Result<T> {
-        case success(T)
-        case failure(Error)
-    }
-    
     struct TinkoffAPIClientError: LocalizedError {
         let errorDescription: String?
         
