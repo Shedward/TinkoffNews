@@ -7,3 +7,7 @@
 //
 
 import Foundation
+
+protocol IdentifiableObject {
+    var id: Int32 { get }
+}

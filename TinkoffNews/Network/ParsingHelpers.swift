@@ -7,3 +7,16 @@
 //
 
 import Foundation
+
+extension KeyedDecodingContainer {
+    
+    private enum PublicationDateKeys: String, CodingKey {
+        case milliseconds
+    }
+    
+    func decodeTimestamp(forKey key: Key) throws -> Date {
+        let dateContainer = try self.nestedContainer(keyedBy: PublicationDateKeys.self, forKey: key)
+        let timestamp = try dateContainer.decode(TimeInterval.self, forKey: .milliseconds)
+        return Date(timeIntervalSince1970: timestamp)
+    }
+}

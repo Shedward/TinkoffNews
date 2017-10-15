@@ -7,3 +7,15 @@
 //
 
 import Foundation
+
+struct NewsArticleContent: NewsArticleContentInterface {
+    let id: Int32
+    let title: String
+    let content: String
+    
+    init(id: Int32, title: String, content: String) {
+        self.id = id
+        self.title = title
+        self.content = content
+    }
+}

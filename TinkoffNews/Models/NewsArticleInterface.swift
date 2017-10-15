@@ -8,8 +8,7 @@
 
 import Foundation
 
-protocol 
-: IdentifiableObject {
+protocol NewsArticleInterface: IdentifiableObject {
     var title: String { get }
     var publicationDate: Date { get }
 }

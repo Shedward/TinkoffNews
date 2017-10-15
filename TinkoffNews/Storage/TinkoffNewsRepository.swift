@@ -11,8 +11,6 @@ import Foundation
 protocol TinkoffNewsRepository {
     func refresh()
     
-    func countOfArticles() -> Int
-    func article(at index: Int)
-    
-    func articleDetails(id: Int)
+    func articles(_ completition: ([NewsArticle]) -> Void)
+    func articleDetails(id: Int, completiton: (NewsArticleContent) -> Void)
 }
