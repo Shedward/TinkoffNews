@@ -8,6 +8,16 @@
 
 import UIKit
 
+enum NewsArticlesListViewControllerSegue: Segue {
+    case showArticleDetails(NewsArticle)
+    
+    var segueIdentifier: String {
+        switch self {
+        case .showArticleDetails: return "ShowArticleDetails"
+        }
+    }
+}
+
 class NewsArticlesListViewController: UITableViewController, ArticlesListDataSourceDelegate {
     
     var articlesDataSource: ArticlesListDataSource!
@@ -17,6 +27,7 @@ class NewsArticlesListViewController: UITableViewController, ArticlesListDataSou
         
         self.articlesDataSource = ArticlesListDataSource(delegate: self)
         tableView.dataSource = articlesDataSource
+        tableView.delegate = self
         articlesDataSource.reload()
     }
     
@@ -40,6 +51,26 @@ class NewsArticlesListViewController: UITableViewController, ArticlesListDataSou
     func dataSource(_ dataSource: ArticlesListDataSource, didFailedWithError error: Error) {
         show(error: error)
         refreshControl?.endRefreshing()
+    }
+    
+    // Navigation
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let article = articlesDataSource.article(at: indexPath)
+        performSegue(NewsArticlesListViewControllerSegue.showArticleDetails(article))
+    }
+    
+    override func prepare(for storyboardSegue: UIStoryboardSegue, sender: Any?) {
+        guard let segue = sender as? NewsArticlesListViewControllerSegue else {
+            return
+        }
+        
+        switch segue {
+        case .showArticleDetails(let article):
+            let destinationViewController = storyboardSegue.destination as! NewsArticleDetailsViewController
+            destinationViewController.articleId = article.id
+            destinationViewController.title = article.title
+        }
     }
 }
 
@@ -75,6 +106,10 @@ class ArticlesListDataSource: NSObject, UITableViewDataSource {
         }
     }
     
+    func article(at indexPath: IndexPath) -> NewsArticle {
+        return articles[indexPath.item]
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return articles.count
     }
@@ -82,7 +117,7 @@ class ArticlesListDataSource: NSObject, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let articleCell = tableView.dequeueReusableCell(withIdentifier: String(describing: NewsArticlesListCell.self)) as! NewsArticlesListCell
         
-        let article = articles[indexPath.item]
+        let article = self.article(at: indexPath)
         articleCell.configure(with: article)
         return articleCell
     }

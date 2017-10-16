@@ -63,7 +63,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Новости Tinkoff" id="oj0-87-4km"/>
                     <connections>
-                        <segue destination="Wbz-pP-EI8" kind="show" id="cps-Jl-saq"/>
+                        <segue destination="Wbz-pP-EI8" kind="show" identifier="ShowArticleDetails" id="cps-Jl-saq"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hok-4L-Pid" userLabel="First Responder" sceneMemberID="firstResponder"/>
