@@ -27,12 +27,14 @@ class NewsArticleDetailsViewController: UIViewController {
     private func reloadArticle() {
         if let articleId = self.articleId {
             Application.shared.newsRepository.articleDetails(id: articleId) { [weak self] result in
-                switch result {
-                case .success(let article):
-                    self?.title = article.title
-                    self?.webView.loadHTMLString(article.content, baseURL: nil)
-                case .failure(let error):
-                    self?.show(error: error)
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success(let article):
+                        self?.title = article.title
+                        self?.webView.loadHTMLString(article.content, baseURL: nil)
+                    case .failure(let error):
+                        self?.show(error: error)
+                    }
                 }
             }
         } else {

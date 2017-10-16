@@ -40,11 +40,7 @@ class TinkoffAPIClient {
     
     private func get<T: Decodable>(path: String, parameters: [String: String] = [:], completition: @escaping (Result<T>) -> Void) -> URLSessionTask {
         
-        var components = URLComponents()
-        components.path = path
-        components.queryItems = parameters.map { URLQueryItem(name: $0.key, value: $0.value) }
-        
-        guard let url = components.url(relativeTo: endpoint) else {
+        guard let url = url(path: path, query: parameters) else {
             fatalError("Failed to format URL for request to endpoint \(endpoint) with path \(path) and parameters \(parameters)")
         }
         
@@ -57,7 +53,6 @@ class TinkoffAPIClient {
             }
             
             if let data = data {
-                
                 do {
                     let response = try JSONDecoder().decode(TinkoffAPIResponse<T>.self, from: data)
                     
@@ -79,5 +74,17 @@ class TinkoffAPIClient {
         
         task.resume()
         return task
+    }
+    
+    private func url(path: String, query: [String: String]) -> URL? {
+        let baseURL = endpoint.appendingPathComponent(path)
+        
+        guard var components = URLComponents(url: baseURL, resolvingAgainstBaseURL: false) else {
+            return nil
+        }
+        
+        components.queryItems = query.map { URLQueryItem(name: $0.key, value: $0.value) }
+        
+        return components.url
     }
 }

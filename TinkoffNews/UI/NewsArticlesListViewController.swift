@@ -34,10 +34,12 @@ class NewsArticlesListViewController: UITableViewController, ArticlesListDataSou
     
     func dataSourceDidUpdateArticles(_ dataSource: ArticlesListDataSource) {
         tableView.reloadData()
+        refreshControl?.endRefreshing()
     }
     
     func dataSource(_ dataSource: ArticlesListDataSource, didFailedWithError error: Error) {
         show(error: error)
+        refreshControl?.endRefreshing()
     }
 }
 
@@ -58,15 +60,17 @@ class ArticlesListDataSource: NSObject, UITableViewDataSource {
     
     func reload(droppingCache: Bool = false) {
         Application.shared.newsRepository.articles { [weak self] result in
-            guard let `self` = self else { return }
-
-            switch result {
-            case .success(let articles):
-                self.articles = articles
-                self.delegate?.dataSourceDidUpdateArticles(self)
-            case .failure(let error):
-                self.articles = []
-                self.delegate?.dataSource(self, didFailedWithError: error)
+            DispatchQueue.main.async {
+                guard let `self` = self else { return }
+                
+                switch result {
+                case .success(let articles):
+                    self.articles = articles
+                    self.delegate?.dataSourceDidUpdateArticles(self)
+                case .failure(let error):
+                    self.articles = []
+                    self.delegate?.dataSource(self, didFailedWithError: error)
+                }
             }
         }
     }

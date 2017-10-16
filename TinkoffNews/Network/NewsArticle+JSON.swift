@@ -19,7 +19,7 @@ extension NewsArticle: Decodable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: Keys.self)
         
-        self.id = try container.decode(Int32.self, forKey: .id)
+        self.id = try container.decodeStringInt(forKey: .id)
         self.title = try container.decode(String.self, forKey: .text)
         self.publicationDate = try container.decodeTimestamp(forKey: .publicationDate)
     }

@@ -26,7 +26,7 @@ extension NewsArticleContent: Decodable {
         self.content = try container.decode(String.self, forKey: .content)
         
         let titleContainer = try container.nestedContainer(keyedBy: TitleKeys.self, forKey: .title)
-        self.id = try titleContainer.decode(Int32.self, forKey: .id)
+        self.id = try titleContainer.decodeStringInt(forKey: .id)
         self.title = try titleContainer.decode(String.self, forKey: .text)
     }
 }

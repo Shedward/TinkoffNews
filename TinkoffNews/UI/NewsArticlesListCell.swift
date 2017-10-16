@@ -16,7 +16,7 @@ class NewsArticlesListCell: UITableViewCell {
     private static let publicationDateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .short
-        dateFormatter.timeStyle = .short
+        dateFormatter.timeStyle = .none
         return dateFormatter
     }()
     
