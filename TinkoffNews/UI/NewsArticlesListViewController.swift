@@ -28,6 +28,8 @@ class NewsArticlesListViewController: UITableViewController, ArticlesListDataSou
         self.articlesDataSource = ArticlesListDataSource(delegate: self)
         tableView.dataSource = articlesDataSource
         tableView.delegate = self
+
+        showRefreshing()
         articlesDataSource.reload()
     }
     
@@ -39,6 +41,15 @@ class NewsArticlesListViewController: UITableViewController, ArticlesListDataSou
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(didPullToRefresh), for: .valueChanged)
         self.refreshControl = refreshControl
+    }
+    
+    private func showRefreshing() {
+        guard let refreshControl = self.refreshControl else {
+            return
+        }
+        
+        tableView.setContentOffset(CGPoint(x: 0, y: -refreshControl.frame.size.height), animated: true)
+        refreshControl.beginRefreshing()
     }
     
     // ArticlesListDataSourceDelegate
