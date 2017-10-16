@@ -11,7 +11,8 @@ import UIKit
 class NewsArticleDetailsViewController: UIViewController {
     
     @IBOutlet weak var webView: UIWebView!
-
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
+    
     var articleId: Int32? = nil {
         didSet {
             if isViewLoaded {
@@ -26,6 +27,9 @@ class NewsArticleDetailsViewController: UIViewController {
     
     private func reloadArticle() {
         if let articleId = self.articleId {
+            webView.loadHTMLString("", baseURL: nil)
+            loadingIndicator.startAnimating()
+    
             Application.shared.newsRepository.articleDetails(id: articleId) { [weak self] result in
                 DispatchQueue.main.async {
                     switch result {
@@ -35,6 +39,8 @@ class NewsArticleDetailsViewController: UIViewController {
                     case .failure(let error):
                         self?.show(error: error)
                     }
+                    
+                    self?.loadingIndicator.stopAnimating()
                 }
             }
         } else {
