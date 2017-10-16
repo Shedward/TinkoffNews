@@ -10,7 +10,7 @@ import CoreData
 
 class CoreDataManager {
     
-    let managedObjectContext: NSManagedObjectContext
+    let mainManagedObjectContext: NSManagedObjectContext
     
     private let modelName: String
     private let objectModel: NSManagedObjectModel
@@ -21,8 +21,8 @@ class CoreDataManager {
         
         self.objectModel = CoreDataManager.createObjectModel(modelName: modelName)
         self.persistentStoreCoordinator = CoreDataManager.createPersistentStoreCoordinator(fileName: modelName, model: objectModel)
-        self.managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-        managedObjectContext.persistentStoreCoordinator = self.persistentStoreCoordinator
+        self.mainManagedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+        mainManagedObjectContext.persistentStoreCoordinator = self.persistentStoreCoordinator
     }
     
     private static func createObjectModel(modelName: String) -> NSManagedObjectModel {
