@@ -13,9 +13,13 @@ class Application {
     
     let newsRepository: TinkoffNewsRepository
     
+    private lazy var coreDataManager = CoreDataManager(modelName: "TinkoffNews")
+    
     private init() {
         let serverURL = URL(string: "https://api.tinkoff.ru/v1")!
         let apiClient = TinkoffAPIClient(endpoint:serverURL)
         self.newsRepository = TinkoffNewsRemoteRepository(apiClient: apiClient)
+        
+        print(coreDataManager.managedObjectContext)
     }
 }

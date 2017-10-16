@@ -22,6 +22,8 @@
 		6322E1991F941DDB00302A93 /* DisplayingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6322E1981F941DDB00302A93 /* DisplayingError.swift */; };
 		6322E19B1F94B26000302A93 /* UILabel+HTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6322E19A1F94B26000302A93 /* UILabel+HTML.swift */; };
 		6322E19D1F94B8E300302A93 /* SegueNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6322E19C1F94B8E300302A93 /* SegueNavigation.swift */; };
+		6322E19F1F94C2E600302A93 /* CoreDataCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6322E19E1F94C2E600302A93 /* CoreDataCache.swift */; };
+		6322E1A11F94C77400302A93 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6322E1A01F94C77400302A93 /* CoreDataManager.swift */; };
 		63E3E8511F8D5353002CD766 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E3E8501F8D5353002CD766 /* AppDelegate.swift */; };
 		63E3E8561F8D5353002CD766 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63E3E8541F8D5353002CD766 /* Main.storyboard */; };
 		63E3E8591F8D5353002CD766 /* TinkoffNews.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 63E3E8571F8D5353002CD766 /* TinkoffNews.xcdatamodeld */; };
@@ -52,6 +54,8 @@
 		6322E1981F941DDB00302A93 /* DisplayingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayingError.swift; sourceTree = "<group>"; };
 		6322E19A1F94B26000302A93 /* UILabel+HTML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+HTML.swift"; sourceTree = "<group>"; };
 		6322E19C1F94B8E300302A93 /* SegueNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegueNavigation.swift; sourceTree = "<group>"; };
+		6322E19E1F94C2E600302A93 /* CoreDataCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataCache.swift; sourceTree = "<group>"; };
+		6322E1A01F94C77400302A93 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		63E3E84D1F8D5353002CD766 /* TinkoffNews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinkoffNews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63E3E8501F8D5353002CD766 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63E3E8551F8D5353002CD766 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -117,9 +121,11 @@
 			isa = PBXGroup;
 			children = (
 				63E3E8701F91435E002CD766 /* RepositoryList.swift */,
-				63E3E8721F9248C1002CD766 /* RepositoryCache.swift */,
 				63E3E86E1F9142E8002CD766 /* TinkoffNewsRepository.swift */,
 				6322E18E1F94135500302A93 /* TinkoffNewsRemoteRepository.swift */,
+				63E3E8721F9248C1002CD766 /* RepositoryCache.swift */,
+				6322E19E1F94C2E600302A93 /* CoreDataCache.swift */,
+				6322E1A01F94C77400302A93 /* CoreDataManager.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -234,6 +240,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6322E19F1F94C2E600302A93 /* CoreDataCache.swift in Sources */,
 				6322E18F1F94135500302A93 /* TinkoffNewsRemoteRepository.swift in Sources */,
 				63E3E8791F925B81002CD766 /* NewsArticleInterface.swift in Sources */,
 				6322E1911F94177B00302A93 /* NewsArticlesListViewController.swift in Sources */,
@@ -253,6 +260,7 @@
 				6322E1971F941C7800302A93 /* Application.swift in Sources */,
 				63E3E8511F8D5353002CD766 /* AppDelegate.swift in Sources */,
 				6322E18B1F94036000302A93 /* TinkoffAPIResponse.swift in Sources */,
+				6322E1A11F94C77400302A93 /* CoreDataManager.swift in Sources */,
 				6322E1991F941DDB00302A93 /* DisplayingError.swift in Sources */,
 				6322E1951F94183000302A93 /* NewsArticlesListCell.swift in Sources */,
 				6322E19B1F94B26000302A93 /* UILabel+HTML.swift in Sources */,
