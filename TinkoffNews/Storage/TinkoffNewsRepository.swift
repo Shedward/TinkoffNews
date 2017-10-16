@@ -9,8 +9,8 @@
 import Foundation
 
 protocol TinkoffNewsRepository {
-    func refresh()
+    func clearCache()
     
-    func articles(_ completition: (Result<[NewsArticle]>) -> Void)
-    func articleDetails(id: Int, completiton: (Result<NewsArticleContent>) -> Void)
+    func articles(_ completition: @escaping (Result<[NewsArticle]>) -> Void)
+    func articleDetails(id: Int32, completiton: @escaping (Result<NewsArticleContent>) -> Void)
 }

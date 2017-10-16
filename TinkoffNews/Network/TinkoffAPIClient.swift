@@ -25,11 +25,13 @@ class TinkoffAPIClient {
         self.endpoint = endpoint
     }
     
+    @discardableResult
     func getArticlesList(_ completition: @escaping (Result<[NewsArticle]>) -> Void) -> URLSessionTask {
         return get(path: "/news",
                    completition: completition)
     }
     
+    @discardableResult
     func getArticleContent(articleId: Int32, _ completition: @escaping (Result<NewsArticleContent>) -> Void) -> URLSessionTask {
         return get(path: "/news_content",
                    parameters: ["id": String(articleId)],
