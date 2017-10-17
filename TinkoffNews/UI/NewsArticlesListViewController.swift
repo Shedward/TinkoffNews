@@ -115,20 +115,30 @@ class ArticlesListDataSource: NSObject, UITableViewDataSource {
             self.delegate?.dataSourceDidUpdateArticles(self)
             return
         }
-
-        newsRepository.articles { [weak self] result in
-            DispatchQueue.main.async {
-                guard let `self` = self else { return }
-                
-                switch result {
-                case .success(let articles):
-                    self.articles = articles
-                    self.delegate?.dataSourceDidUpdateArticles(self)
-                case .failure(let error):
-                    self.articles = []
-                    self.delegate?.dataSource(self, didFailedWithError: error)
+        
+        let loadData = { () in
+            newsRepository.articles { [weak self] result in
+                DispatchQueue.main.async {
+                    guard let `self` = self else { return }
+                    
+                    switch result {
+                    case .success(let articles):
+                        self.articles = articles
+                        self.delegate?.dataSourceDidUpdateArticles(self)
+                    case .failure(let error):
+                        self.articles = []
+                        self.delegate?.dataSource(self, didFailedWithError: error)
+                    }
                 }
             }
+        }
+
+        if droppingCache {
+            newsRepository.clearCache {
+                loadData()
+            }
+        } else {
+            loadData()
         }
     }
     

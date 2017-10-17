@@ -115,6 +115,8 @@ class TinkoffNewsCoreDataCachingRepository: TinkoffNewsRepository {
                 NSLog("Warning: Failed to clear article contents cache: \(error.localizedDescription)")
             }
             
+            completition?()
+            
             self.coreDataManager.saveAllChanges()
         }
     }
