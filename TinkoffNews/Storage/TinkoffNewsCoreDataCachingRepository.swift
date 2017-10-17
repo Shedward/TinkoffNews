@@ -47,6 +47,7 @@ class TinkoffNewsCoreDataCachingRepository: TinkoffNewsRepository {
                         
                         do {
                             try articlesCache.add(contentsOf: articlesList)
+                            self.coreDataManager.saveAllChanges()
                         } catch (let error) {
                             NSLog("Warning: Failed to save NewsArticles in cache: \(error.localizedDescription)")
                         }
@@ -84,6 +85,7 @@ class TinkoffNewsCoreDataCachingRepository: TinkoffNewsRepository {
                         
                         do {
                             try articleContentCache.add(element: articleContent)
+                            self.coreDataManager.saveAllChanges()
                         } catch (let error) {
                             NSLog("Warning: Failed to save NewsArticleContent in cache: \(error.localizedDescription)")
                         }
@@ -112,6 +114,8 @@ class TinkoffNewsCoreDataCachingRepository: TinkoffNewsRepository {
             } catch (let error) {
                 NSLog("Warning: Failed to clear article contents cache: \(error.localizedDescription)")
             }
+            
+            self.coreDataManager.saveAllChanges()
         }
     }
 }
