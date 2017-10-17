@@ -15,6 +15,11 @@ protocol DisplayingError {
 extension UIViewController: DisplayingError {
     func show(error: Error) {
         let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: .cancel) { [weak alertController] action in
+            alertController?.dismiss(animated: true, completion: nil)
+        })
+        
         self.present(alertController, animated: true, completion: nil)
     }
 }
