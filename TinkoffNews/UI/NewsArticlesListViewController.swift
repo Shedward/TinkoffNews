@@ -32,7 +32,7 @@ class NewsArticlesListViewController: UITableViewController, ArticlesListDataSou
         showRefreshing()
         articlesDataSource.reload()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(repositoriesDidFinishInitialization), name: ApplicationNotification.repositoriesIsReady.name, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(repositoriesDidFinishInitialization), name: ApplicationNotification.repositoriesAreReady.name, object: nil)
     }
     
     deinit {

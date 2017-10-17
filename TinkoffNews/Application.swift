@@ -9,7 +9,7 @@
 import Foundation
 
 enum ApplicationNotification: String {
-    case repositoriesIsReady
+    case repositoriesAreReady
     
     var name: NSNotification.Name {
         return NSNotification.Name(self.rawValue)
@@ -32,7 +32,7 @@ class Application {
             self.coreDataManager = coreDataManager
             self.newsRepository = TinkoffNewsCoreDataCachingRepository(apiClient: apiClient, coreDataManager: coreDataManager)
             
-            NotificationCenter.default.post(name: ApplicationNotification.repositoriesIsReady.name, object: nil)
+            NotificationCenter.default.post(name: ApplicationNotification.repositoriesAreReady.name, object: nil)
         }
     }
     
