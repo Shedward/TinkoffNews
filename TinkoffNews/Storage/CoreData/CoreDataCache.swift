@@ -13,25 +13,32 @@ class CoreDataCache<T: CoreDataCachableModel>: RepositoryCache where T.CachingEn
     typealias Element = T
     typealias CoreDataEntity = Element.CachingEntityType
     
-    private var coreDataManager: CoreDataManager
+    private var managedObjectContext: NSManagedObjectContext
     
-    private var performingBatchUpdate: Bool = true
-    
-    init(coreDataManager: CoreDataManager) {
-        self.coreDataManager = coreDataManager
+    init(context: NSManagedObjectContext) {
+        self.managedObjectContext = context
     }
 
     func add(element: Element) throws {
-        let newEntity = CoreDataEntity.create(in: coreDataManager.mainManagedObjectContext)
+        let newEntity = CoreDataEntity.create(in: managedObjectContext)
         newEntity.populate(from: element)
-        try saveContextIfNeeded()
+        try managedObjectContext.save()
+    }
+    
+    func add(contentsOf elements: [Element]) throws {
+        for element in elements {
+            let newEntity = CoreDataEntity.create(in: managedObjectContext)
+            newEntity.populate(from: element)
+        }
+        
+        try managedObjectContext.save()
     }
     
     func get(by id: Int32) throws -> Element? {
         let fetchRequest: NSFetchRequest<CoreDataEntity> = CoreDataEntity.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "id == %@", id)
+        fetchRequest.predicate = NSPredicate(format: "id == \(id)")
         
-        let firstEntity = try coreDataManager.mainManagedObjectContext.fetch(fetchRequest).first
+        let firstEntity = try managedObjectContext.fetch(fetchRequest).first
         return firstEntity?.toModel()
     }
     
@@ -39,7 +46,7 @@ class CoreDataCache<T: CoreDataCachableModel>: RepositoryCache where T.CachingEn
         let fetchRequest: NSFetchRequest<CoreDataEntity> = CoreDataEntity.fetchRequest()
         fetchRequest.sortDescriptors = sortDescriptors
     
-        let entities = try coreDataManager.mainManagedObjectContext.fetch(fetchRequest)
+        let entities = try managedObjectContext.fetch(fetchRequest)
         let models = entities.map { $0.toModel() }
         return models
     }
@@ -48,24 +55,7 @@ class CoreDataCache<T: CoreDataCachableModel>: RepositoryCache where T.CachingEn
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: CoreDataEntity.entityName)
         let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
         
-        try coreDataManager.mainManagedObjectContext.execute(batchDeleteRequest)
-        try saveContextIfNeeded()
-    }
-    
-    func beginUpdates() {
-        performingBatchUpdate = true
-    }
-    
-    func endUpdates() throws {
-        performingBatchUpdate = false
-        try saveContextIfNeeded()
-    }
-    
-    private func saveContextIfNeeded() throws {
-        if performingBatchUpdate {
-            return
-        }
-        
-        try coreDataManager.mainManagedObjectContext.save()
+        try managedObjectContext.execute(batchDeleteRequest)
+        try managedObjectContext.save()
     }
 }

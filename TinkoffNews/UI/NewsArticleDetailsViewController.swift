@@ -16,21 +16,21 @@ class NewsArticleDetailsViewController: UIViewController {
     var articleId: Int32? = nil {
         didSet {
             if isViewLoaded {
-                reloadArticle()
+                reload()
             }
         }
     }
     
     override func viewDidLoad() {
-        reloadArticle()
+        reload()
     }
     
-    private func reloadArticle() {
+    private func reload() {
         if let articleId = self.articleId {
             webView.loadHTMLString("", baseURL: nil)
             loadingIndicator.startAnimating()
     
-            Application.shared.newsRepository.articleDetails(id: articleId) { [weak self] result in
+            Application.shared.newsRepository?.articleDetails(id: articleId) { [weak self] result in
                 DispatchQueue.main.async {
                     switch result {
                     case .success(let article):

@@ -28,9 +28,6 @@ class NewsArticlesListViewController: UITableViewController, ArticlesListDataSou
         self.articlesDataSource = ArticlesListDataSource(delegate: self)
         tableView.dataSource = articlesDataSource
         tableView.delegate = self
-
-        showRefreshing()
-        articlesDataSource.reload()
     }
     
     @objc private func didPullToRefresh() {
@@ -101,7 +98,7 @@ class ArticlesListDataSource: NSObject, UITableViewDataSource {
     }
     
     func reload(droppingCache: Bool = false) {
-        Application.shared.newsRepository.articles { [weak self] result in
+        Application.shared.newsRepository?.articles { [weak self] result in
             DispatchQueue.main.async {
                 guard let `self` = self else { return }
                 

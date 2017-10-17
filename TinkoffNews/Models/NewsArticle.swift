@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct NewsArticle: NewsArticleInterface {
+struct NewsArticle: IdentifiableObject {
     let id: Int32
     let title: String
     let publicationDate: Date

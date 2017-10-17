@@ -12,10 +12,8 @@ protocol RepositoryCache {
     associatedtype Element: IdentifiableObject
     
     func add(element: Element) throws
+    func add(contentsOf: [Element]) throws 
     func get(by id: Int32) throws -> Element?
     func getAll(sortedBy: [NSSortDescriptor]) throws -> [Element]
     func clear() throws
-    
-    func beginUpdates()
-    func endUpdates() throws
 }

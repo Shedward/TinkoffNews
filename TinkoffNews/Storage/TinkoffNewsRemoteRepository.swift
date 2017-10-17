@@ -10,14 +10,14 @@ import Foundation
 
 class TinkoffNewsRemoteRepository: TinkoffNewsRepository {
     
-    let apiClient: TinkoffAPIClient
+    private let apiClient: TinkoffAPIClient
     
     init(apiClient: TinkoffAPIClient) {
         self.apiClient = apiClient
     }
     
-    func clearCache() {
-
+    func clearCache(_ completition: (() -> Void)?) {
+        completition?()
     }
     
     func articles(_ completition: @escaping (Result<[NewsArticle]>) -> Void) {

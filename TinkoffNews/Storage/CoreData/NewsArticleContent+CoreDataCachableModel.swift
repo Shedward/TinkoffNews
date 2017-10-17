@@ -15,6 +15,10 @@ extension NewsArticleContent: CoreDataCachableModel {
 extension NewsArticleContentEntity: CoreDataCachingEntity {
     typealias OriginalModel = NewsArticleContent
     
+    static var entityName: String {
+        return "NewsArticleContentEntity"
+    }
+    
     func populate(from model: NewsArticleContent) {
         self.id = model.id
         self.title = model.title

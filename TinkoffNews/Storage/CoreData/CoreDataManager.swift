@@ -10,7 +10,7 @@ import CoreData
 
 class CoreDataManager {
     
-    let mainManagedObjectContext: NSManagedObjectContext
+    private let parentContext: NSManagedObjectContext
     
     private let modelName: String
     private let objectModel: NSManagedObjectModel
@@ -21,8 +21,29 @@ class CoreDataManager {
         
         self.objectModel = CoreDataManager.createObjectModel(modelName: modelName)
         self.persistentStoreCoordinator = CoreDataManager.createPersistentStoreCoordinator(fileName: modelName, model: objectModel)
-        self.mainManagedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-        mainManagedObjectContext.persistentStoreCoordinator = self.persistentStoreCoordinator
+
+        self.parentContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        self.parentContext.persistentStoreCoordinator = self.persistentStoreCoordinator
+    }
+    
+    func saveAllChanges() {
+        do {
+            try parentContext.save()
+        } catch (let error) {
+            NSLog("Warning: Failed to save parent context: \(error)")
+        }
+    }
+    
+    func contextForCurrentThread() -> NSManagedObjectContext {
+        let context: NSManagedObjectContext
+        if Thread.isMainThread {
+            context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+        } else {
+            context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        }
+        
+        context.parent = parentContext
+        return context
     }
     
     private static func createObjectModel(modelName: String) -> NSManagedObjectModel {

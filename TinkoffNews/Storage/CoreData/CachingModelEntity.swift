@@ -17,15 +17,13 @@ protocol CoreDataCachingEntity {
     associatedtype OriginalModel: CoreDataCachableModel
         where OriginalModel.CachingEntityType == Self
     
+    static var entityName: String { get }
+    
     func populate(from model: OriginalModel)
     func toModel() -> OriginalModel
 }
 
 extension CoreDataCachingEntity where Self: NSManagedObject {
-    
-    static var entityName: String {
-         return String(describing: type(of: self))
-    }
     
     static func create(in context: NSManagedObjectContext) -> Self {
         let newObject = NSEntityDescription.insertNewObject(forEntityName: entityName, into: context)
