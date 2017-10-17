@@ -34,7 +34,6 @@
 		63E3E85B1F8D5353002CD766 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63E3E85A1F8D5353002CD766 /* Assets.xcassets */; };
 		63E3E85E1F8D5353002CD766 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63E3E85C1F8D5353002CD766 /* LaunchScreen.storyboard */; };
 		63E3E86F1F9142E8002CD766 /* TinkoffNewsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E3E86E1F9142E8002CD766 /* TinkoffNewsRepository.swift */; };
-		63E3E8711F91435E002CD766 /* RepositoryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E3E8701F91435E002CD766 /* RepositoryList.swift */; };
 		63E3E8731F9248C1002CD766 /* RepositoryCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E3E8721F9248C1002CD766 /* RepositoryCache.swift */; };
 		63E3E8761F9252FE002CD766 /* TinkoffAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E3E8751F9252FE002CD766 /* TinkoffAPIClient.swift */; };
 		63E3E87D1F925BD0002CD766 /* IdentifiableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E3E87C1F925BD0002CD766 /* IdentifiableObject.swift */; };
@@ -70,7 +69,6 @@
 		63E3E85D1F8D5353002CD766 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63E3E85F1F8D5353002CD766 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		63E3E86E1F9142E8002CD766 /* TinkoffNewsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinkoffNewsRepository.swift; sourceTree = "<group>"; };
-		63E3E8701F91435E002CD766 /* RepositoryList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryList.swift; sourceTree = "<group>"; };
 		63E3E8721F9248C1002CD766 /* RepositoryCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryCache.swift; sourceTree = "<group>"; };
 		63E3E8751F9252FE002CD766 /* TinkoffAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinkoffAPIClient.swift; sourceTree = "<group>"; };
 		63E3E87C1F925BD0002CD766 /* IdentifiableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiableObject.swift; sourceTree = "<group>"; };
@@ -137,7 +135,6 @@
 		63E3E86D1F9142D6002CD766 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
-				63E3E8701F91435E002CD766 /* RepositoryList.swift */,
 				63E3E86E1F9142E8002CD766 /* TinkoffNewsRepository.swift */,
 				6322E18E1F94135500302A93 /* TinkoffNewsRemoteRepository.swift */,
 				6322E1A91F95720200302A93 /* TinkoffNewsCoreDataCachingRepository.swift */,
@@ -281,7 +278,6 @@
 				6322E1991F941DDB00302A93 /* DisplayingError.swift in Sources */,
 				6322E1951F94183000302A93 /* NewsArticlesListCell.swift in Sources */,
 				6322E19B1F94B26000302A93 /* UILabel+HTML.swift in Sources */,
-				63E3E8711F91435E002CD766 /* RepositoryList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
