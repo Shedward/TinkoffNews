@@ -70,8 +70,8 @@ class NewsArticlesListViewController: UITableViewController, ArticlesListDataSou
     }
     
     func dataSource(_ dataSource: ArticlesListDataSource, didFailedWithError error: Error) {
-        show(error: error)
         refreshControl?.endRefreshing()
+        show(error: error)
     }
     
     // Navigation
@@ -126,7 +126,6 @@ class ArticlesListDataSource: NSObject, UITableViewDataSource {
                         self.articles = articles
                         self.delegate?.dataSourceDidUpdateArticles(self)
                     case .failure(let error):
-                        self.articles = []
                         self.delegate?.dataSource(self, didFailedWithError: error)
                     }
                 }
