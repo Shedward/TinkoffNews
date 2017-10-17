@@ -8,6 +8,14 @@
 
 import Foundation
 
+enum ApplicationNotification: String {
+    case repositoriesIsReady
+    
+    var name: NSNotification.Name {
+        return NSNotification.Name(self.rawValue)
+    }
+}
+
 class Application {
     static let shared: Application = Application()
     
@@ -23,6 +31,8 @@ class Application {
             let coreDataManager = CoreDataManager(modelName: "TinkoffNews")
             self.coreDataManager = coreDataManager
             self.newsRepository = TinkoffNewsCoreDataCachingRepository(apiClient: apiClient, coreDataManager: coreDataManager)
+            
+            NotificationCenter.default.post(name: ApplicationNotification.repositoriesIsReady.name, object: nil)
         }
     }
     

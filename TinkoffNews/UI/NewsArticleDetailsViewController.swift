@@ -29,8 +29,13 @@ class NewsArticleDetailsViewController: UIViewController {
         if let articleId = self.articleId {
             webView.loadHTMLString("", baseURL: nil)
             loadingIndicator.startAnimating()
+            
+            guard let newsRepository = Application.shared.newsRepository else {
+                loadingIndicator.stopAnimating()
+                return
+            }
     
-            Application.shared.newsRepository?.articleDetails(id: articleId) { [weak self] result in
+            newsRepository.articleDetails(id: articleId) { [weak self] result in
                 DispatchQueue.main.async {
                     switch result {
                     case .success(let article):

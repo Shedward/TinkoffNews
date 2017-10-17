@@ -28,10 +28,23 @@ class NewsArticlesListViewController: UITableViewController, ArticlesListDataSou
         self.articlesDataSource = ArticlesListDataSource(delegate: self)
         tableView.dataSource = articlesDataSource
         tableView.delegate = self
+        
+        showRefreshing()
+        articlesDataSource.reload()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(repositoriesDidFinishInitialization), name: ApplicationNotification.repositoriesIsReady.name, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     @objc private func didPullToRefresh() {
         articlesDataSource.reload(droppingCache: true)
+    }
+    
+    @objc private func repositoriesDidFinishInitialization() {
+        articlesDataSource.reload()
     }
     
     private func configurePullToRefresh() {
@@ -98,7 +111,12 @@ class ArticlesListDataSource: NSObject, UITableViewDataSource {
     }
     
     func reload(droppingCache: Bool = false) {
-        Application.shared.newsRepository?.articles { [weak self] result in
+        guard let newsRepository = Application.shared.newsRepository else {
+            self.delegate?.dataSourceDidUpdateArticles(self)
+            return
+        }
+
+        newsRepository.articles { [weak self] result in
             DispatchQueue.main.async {
                 guard let `self` = self else { return }
                 
